@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import giphy from 'giphy-api';
-
 import SearchBar from './search_bar.jsx';
 import Gif from './gif.jsx';
 import GifsList from './gifs_list.jsx';
+import giphy from 'giphy-api';
 
 const GIPHY_API_KEY = '78pPY1EnLUwiWBpLPoqsd8GzlYzuhTPw';
 
@@ -11,9 +10,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gifs: [],
-      selectedGifId: 'RVW5PilbP2tLG'
-    }
+      id: 'RVW5PilbP2tLG',
+      gifs: []
+    };
   }
 
   search = (query) => {
@@ -30,24 +29,24 @@ class App extends Component {
 
   selectGif = (id) => {
     this.setState({
-      selectedGifId: id
+      id: id
     });
   }
 
   render() {
-    return (
+    return(
       <div>
         <div className="left-scene">
           <SearchBar searchFunction={this.search}/>
           <div className="selected-gif">
-            <Gif id={this.state.selectedGifId} />
+            <Gif id={this.state.id}/>
           </div>
         </div>
         <div className="right-scene">
-          <GifsList gifs={this.state.gifs} selectGif={this.selectGif} />
+          <GifsList gifs={this.state.gifs} selectGifFunction={this.selectGif}/>
         </div>
       </div>
-    )
+    );
   }
 }
 
